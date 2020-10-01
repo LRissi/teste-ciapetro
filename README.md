@@ -27,14 +27,15 @@ A aplicação cliente e servidor deverão se comunicar por meio de uma API REST.
 ### Observações
 
 - Você deverá usar a API da [Currency layer](https://currencylayer.com/) é so fazer o cadastro gratis.
+- A api gratis não permite trocar a moeda de referência(Dolar americano USD) mas ainda sim o sistema deve ter a opção de trocar a modeda de origem e o erro deve ser trato para usuário informando o motivo.
 - Para buscar os dados da cotações use o endpoint dos dados realtime que é https://api.currencylayer.com/live
 - Para listar as moedas que a API suporta pode usar https://api.currencylayer.com/list
 - Para saber como usar a API acesse a [Documentação](https://currencylayer.com/documentation).
 
+
 ### Requisitos
 
-- Para o servidor você poderá utilizar qualquer linguagem de programação. Implementá-lo em Node.js com Javascript ou Typescript será um diferencial.
-- Utilizar algum tipo de ORM para o gerenciamento de entidades entre o servidor e o banco de dados.
+- Para o servidor você poderá utilizar qualquer linguagem de programação.
 - Para a aplicação web utilizar algum dos seguintes frameworks: React, Vue ou Angular 2+.
 - Você pode utilizar qualquer bando de dados.
 - Você pode utilizar qualquer dependência/módulo/pacote que você tenha conhecimento.
@@ -43,6 +44,7 @@ A aplicação cliente e servidor deverão se comunicar por meio de uma API REST.
 ### Entrega
 
 - Você tem 7 dias para entrega do teste.
+- Tudo que for feito será avaliado, mesmo que o projeto esteja incompleto.
 - O projeto deve ser entregue em um repositório do github contendo um README.md
 - No README.md deve ser explicado como executar/compilar a aplicação e também explicar a razão de utilizar cada dependência/módulo/pacote que você utilizou.
 
