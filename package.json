@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/LRissi/teste-ciapetro/issues"
   },
-  "homepage": "https://github.com/LRissi/teste-ciapetro#readme"
+  "homepage": "https://github.com/LRissi/teste-ciapetro#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-myconnection": "^1.0.4",
+    "mysql": "^2.18.1"
+  }
 }
