@@ -42,16 +42,16 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   	User.findById(req.params.userId, (err, data) => {
     	if (err) {
-      		if (err.kind === "not_found") {
-	        	res.status(404).send({
-	          		message: `Nenhum usuário encontrado com o id ${req.params.userId}.`
-	        	});
-	        return;
-      	}
+    		if (err.kind === "not_found") {
+        	res.status(404).send({
+          		message: `Nenhum usuário encontrado com o id ${req.params.userId}.`
+        	});
+          return;
+    	  }
 
-	    res.status(500).send({
-	      	message: "Erro ao buscar o usuário com id " + req.params.userId
-	    });
+  	    res.status(500).send({
+  	      	message: "Erro ao buscar o usuário com id " + req.params.userId
+  	    });
       	return;
     }
     res.send(data);

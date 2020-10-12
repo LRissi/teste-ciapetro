@@ -1,6 +1,7 @@
 module.exports = app => {
   const history = require("../controllers/history.js");
-  app.get("/listCoins", history.list);
+  app.get("/listCoins", history.listCoins);
   app.post("/convert", history.convert);
-  //app.get("/users/:userId", users.findOne);
+  app.get("/listByUser/:userId", history.listByUser);
+  app.get("/detail/:historyId", history.findOne)
 };

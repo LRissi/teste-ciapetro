@@ -20,7 +20,23 @@ History.create = (newHistory, result) => {
   });
 }
 
-History.findById = (historyId, result) => {
+History.findByUserId = (userId, result) => {
+	sql.query(`SELECT * FROM history WHERE user_id = ${userId}`, (err, res) => {
+		if (err) {
+			console.log("error: ", err);
+			result(err, null);
+			return;
+		}
+		if (!res.length) {
+			result({ kind: "not_found" }, null);
+			return;
+		}
+		console.log("historys: ", res);
+    	result(null, res);
+	});
+}
+
+History.findOne = (historyId, result) => {
 	sql.query(`SELECT * FROM history WHERE id = ${historyId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
