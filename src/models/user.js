@@ -1,7 +1,6 @@
 const sql = require("../connection/connection.js");
 
 const User = function(user) {
-	this.id = user.id;
 	this.uid = user.uid;
 	this.email = user.email;
 	this.name = user.name;
@@ -9,7 +8,7 @@ const User = function(user) {
 }
 
 User.create = (newUser, result) => {
-  sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
+  sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -22,7 +21,7 @@ User.create = (newUser, result) => {
 };
 
 User.findById = (userId, result) => {
-  sql.query(`SELECT * FROM users WHERE id = ${userId}`, (err, res) => {
+  sql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -41,7 +40,7 @@ User.findById = (userId, result) => {
 };
 
 User.getAll = result => {
-  sql.query("SELECT * FROM users", (err, res) => {
+  sql.query("SELECT * FROM user", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
