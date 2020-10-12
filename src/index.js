@@ -10,4 +10,6 @@ app.get('/', (req, res) => {
 	res.send('Working!');
 });
 
+require("./routes/history.js")(app);
+
 app.listen(3000)
