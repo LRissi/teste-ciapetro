@@ -49,8 +49,6 @@ History.findOne = (historyId, result) => {
       result(null, res[0])
       return;
     }
-
-    // not found User with the id
     result({ kind: "not_found" }, null);
   });
 }
