@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import * as Google from 'expo-google-app-auth';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -8,13 +9,33 @@ class LoginScreen extends Component {
     };
   }
 
+  signInWithGoogleAsync = async () => {
+    try {
+      const result = await Google.logInAsync({
+        behavior: 'web',
+        androidClientId: '493290282168-0vc9fk3run465v6rj5c2c8q5rrnr632s.apps.googleusercontent.com',
+        //iosClientId: YOUR_CLIENT_ID_HERE,
+        scopes: ['profile', 'email'],
+      });
+  
+      if (result.type === 'success') {
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      alert(e);
+      return { error: true };
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <TouchableOpacity 
           activeOpacity={.8}
           style={[styles.button, {backgroundColor: '#ebeced'}]}
-          onPress={() => alert('button 1')}>
+          onPress={() => this.signInWithGoogleAsync()}>
             <Text style={{color:'#000000'}}>Entrar com o Google</Text>
         </TouchableOpacity>
         <TouchableOpacity 
