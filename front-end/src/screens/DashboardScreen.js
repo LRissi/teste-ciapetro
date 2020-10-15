@@ -18,13 +18,14 @@ class DashboradScreen extends Component {
       sourceCoin: "USD",
       destinyCoin: "",
       optionsCoins: {},
+      valueToConvert: '',
       convertedValue: ''
     };
     this.getCoinsFromApi();
   }
 
   getCoinsFromApi = () => {
-    fetch(urlBaseApi + 'listCoins/').then(response =>
+    fetch(`${urlBaseApi}listCoins/`).then(response =>
       response.json()
     ).then(json => {
       this.setState({optionsCoins: json.currencies});
@@ -44,15 +45,17 @@ class DashboradScreen extends Component {
   }
 
   submitConversao = () => {
-    fetch(urlBaseApi + 'endpoint/', {
+    fetch(`${urlBaseApi}convert/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        firstParam: 'yourValue',
-        secondParam: 'yourOtherValue'
+        userId: firebase.auth().currentUser.uid,
+        source: this.state.sourceCoin,
+        destiny: this.state.destinyCoin,
+        valueToConvert: this.state.valueToConvert
       })
     });
   }
@@ -90,6 +93,8 @@ class DashboradScreen extends Component {
             placeholderTextColor="#2b307e"
             style={styles.input}
             keyboardType="numeric"
+            onChange={value =>
+              this.setState({valueToConvert: value})}
           />
 
           <TouchableOpacity style={styles.btn}>

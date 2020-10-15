@@ -84,7 +84,8 @@ exports.convert = (req, res) => {
     	return;
   	}
   	const sourceCoin = req.body.source;
-  	const destinyCoin = req.body.destiny;
+	const destinyCoin = req.body.destiny;
+	const valueToConvert = req.body.valueToConvert;  
   	console.log(destinyCoin);
   	const { userId } = req.body
   	const url = `http://api.currencylayer.com/live?access_key=${currencyLayerConfig.KEY}&` +
@@ -102,8 +103,9 @@ exports.convert = (req, res) => {
         saveHistory({
         	user_id: userId,
         	source_coin: sourceCoin,
-        	destiny_coin: destinyCoin,
-        	conversion_value: conversionValue
+			destiny_coin: destinyCoin,
+			value_to_convert: valueToConvert,
+			conversion_value: conversionValue,
         }, res);
         res.send(JSON.stringify(response.data));
     })
