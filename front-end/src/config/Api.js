@@ -1,0 +1,1 @@
+export const urlBaseApi = 'http://192.168.237.138:3000/';
