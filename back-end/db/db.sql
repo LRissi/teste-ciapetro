@@ -1,6 +1,6 @@
-CREATE DATABASE `ciapretro`;
+CREATE DATABASE `ciapetro`;
 
-USE DATABASE `ciapretro`;
+USE DATABASE `ciapetro`;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -19,7 +19,7 @@ CREATE TABLE `history` (
   `destiny_coin` varchar(3) DEFAULT NULL,
   `value_to_convert` double DEFAULT NULL,
   `conversion_value` double DEFAULT NULL,
-  `create_at` DATE NOT NULL CURRENT_DATE,
+  `create_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `idx_by_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, List, TouchableOpacity, FlatList, ListItem } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Text, List, TouchableOpacity, FlatList, Item } from 'react-native';
 import firebase from 'firebase';
 import { urlBaseApi } from '../config/Api';
 
@@ -45,29 +45,28 @@ class HistoryScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <List>
-            <FlatList
-                data={this.state.data}
-                renderItem={({item}) => {
-                    <ListItem
-                        title={`${item.source_coin} -> ${item.destiny_coin}`}
-                        subtitle={`Valor: ${item.value_to_convert} - Data: ${item.create_at}`}
-                    />
-                }}
-                ItemSeparatorComponent={this.renderSeparator}
-                ListHeaderComponent={this.renderButtonRefresh}
-            />
-        </List>
-      </View>
+      <SafeAreaView  style={styles.container}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('DashboardScreen')}><Text>aaaa</Text></TouchableOpacity>
+        {/* <FlatList //alert(JSON.stringify(this.state.itens)
+            data={this.state.itens}
+            renderItem={({item}) => {
+                <Item
+                    title={`${item.source_coin} -> ${item.destiny_coin}`}
+                    subtitle={`Valor: ${item.value_to_convert} - Data: ${item.create_at}`}
+                />
+            }}
+            // ItemSeparatorComponent={this.renderSeparator}
+            // ListHeaderComponent={this.renderButtonRefresh}
+        /> */}
+      </SafeAreaView >
     );
   }
 }
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: "center",
+      alignItems: "center",
     },
     btnRefresh: {
       backgroundColor: '#0385c5',

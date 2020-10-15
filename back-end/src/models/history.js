@@ -21,7 +21,7 @@ History.create = (newHistory, result) => {
 }
 
 History.findByUserId = (userId, result) => {
-	sql.query(`SELECT * FROM history WHERE user_id = ${userId}`, (err, res) => {
+	sql.query(`SELECT * FROM history WHERE user_id = ?`, userId, (err, res) => {
 		if (err) {
 			console.log("error: ", err);
 			result(err, null);

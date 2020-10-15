@@ -44,6 +44,10 @@ class DashboradScreen extends Component {
     this.setState({sourceCoin: coin});
   }
 
+  goToHistoryScreen = () => {
+    this.props.navigation.navigate('HistoryScreen');
+  }
+
   submitConversao = () => {
     fetch(`${urlBaseApi}convert/`, {
       method: 'POST',
@@ -66,7 +70,7 @@ class DashboradScreen extends Component {
         <View style={[styles.container, styles.centeredContainer]}>
           <Image style={styles.logo} source={require("../../assets/ciapetro.png")} />
           <Text style={[styles.title, {color: '#0485c5'}]}>
-            Converter
+            Conversor Ciapetro
           </Text>
           <Picker
             selectedValue={this.state.sourceCoin}
@@ -99,7 +103,8 @@ class DashboradScreen extends Component {
               this.setState({valueToConvert: value})}
           />
 
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn}
+            onPress={() => this.submitConversao()}>
             <Image style={styles.converter} source={require("../../assets/converter_coin.png")} />
           </TouchableOpacity>
 
@@ -110,7 +115,7 @@ class DashboradScreen extends Component {
         <View>
           <TouchableOpacity 
             style={[styles.buttonBottom, {backgroundColor: '#fde01a'}]}
-            onPress={() => this.singOut()}>
+            onPress={() => this.goToHistoryScreen()}>
             <Text>Histórico de Conversão</Text>
           </TouchableOpacity>
           <TouchableOpacity 
