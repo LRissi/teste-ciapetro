@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import * as Google from 'expo-google-app-auth';
+// import * as Google from 'expo-google-app-auth';
+import firebase from 'firebase';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -9,24 +10,30 @@ class LoginScreen extends Component {
     };
   }
 
+  signInWithAnonymously = async () => {
+    firebase.auth().signInAnonymously();
+  }
+
   signInWithGoogleAsync = async () => {
-    try {
-      const result = await Google.logInAsync({
-        behavior: 'web',
-        androidClientId: '493290282168-0vc9fk3run465v6rj5c2c8q5rrnr632s.apps.googleusercontent.com',
-        //iosClientId: YOUR_CLIENT_ID_HERE,
-        scopes: ['profile', 'email'],
-      });
+    alert('Não disponível no momento');
+    // try {
+    //   const result = await Google.logInAsync({
+    //     behavior: 'web',
+    //     androidClientId: '493290282168-0vc9fk3run465v6rj5c2c8q5rrnr632s.apps.googleusercontent.com',
+    //     //iosClientId: YOUR_CLIENT_ID_HERE,
+    //     scopes: ['profile', 'email'],
+    //   });
   
-      if (result.type === 'success') {
-        return result.accessToken;
-      } else {
-        return { cancelled: true };
-      }
-    } catch (e) {
-      alert(e);
-      return { error: true };
-    }
+    //   if (result.type === 'success') {
+    //     this.onSignIn(result)
+    //     return result.accessToken;
+    //   } else {
+    //     return { cancelled: true };
+    //   }
+    // } catch (e) {
+    //   alert(e);
+    //   return { error: true };
+    // }
   }
 
   render() {
@@ -41,7 +48,7 @@ class LoginScreen extends Component {
         <TouchableOpacity 
           activeOpacity={.8}
           style={[styles.button, {backgroundColor: '#e9d3f5'}]}
-          onPress={() => alert('button 2')}>
+          onPress={() => this.signInWithAnonymously()}>
             <Text style={{color:'#000000'}}>Continuar sem Conta</Text>
         </TouchableOpacity>
       </View>
