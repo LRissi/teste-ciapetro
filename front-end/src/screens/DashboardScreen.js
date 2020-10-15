@@ -77,7 +77,9 @@ class DashboradScreen extends Component {
                 return (<Picker.Item label={this.state.optionsCoins[key]} value={key} key={key}/>)
               })}
           </Picker>
-          {/* <Image style={styles.converter} source={require("../../assets/converter_money.png")} /> */}
+          <View style={styles.containerConverter}>
+            <Image style={styles.converter} source={require("../../assets/converter.png")} />
+          </View>
           <Picker
             selectedValue={this.state.destinyCoin}
             style={styles.pickerStyle}
@@ -193,6 +195,12 @@ const styles = StyleSheet.create({
     width: "80%",  
     color: '#344953',  
     justifyContent: 'center',  
+  },
+  containerConverter: {
+    width: 200,
+    height: 70,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

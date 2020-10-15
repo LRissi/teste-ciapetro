@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 // import * as Google from 'expo-google-app-auth';
 import firebase from 'firebase';
 
@@ -39,15 +39,18 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <TouchableOpacity style={styles.buttonLogo}>
+          <Image style={styles.logo} source={require("../../assets/ciapetro2.png")} />
+        </TouchableOpacity>
         <TouchableOpacity 
           activeOpacity={.8}
-          style={[styles.button, {backgroundColor: '#ebeced'}]}
+          style={[styles.button, {backgroundColor: '#ffffff'}]}
           onPress={() => this.signInWithGoogleAsync()}>
             <Text style={{color:'#000000'}}>Entrar com o Google</Text>
         </TouchableOpacity>
         <TouchableOpacity 
           activeOpacity={.8}
-          style={[styles.button, {backgroundColor: '#e9d3f5'}]}
+          style={[styles.button, {backgroundColor: '#d9d50f'}]}
           onPress={() => this.signInWithAnonymously()}>
             <Text style={{color:'#000000'}}>Continuar sem Conta</Text>
         </TouchableOpacity>
@@ -59,7 +62,19 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      backgroundColor: '#031c6e'
+  },
+  buttonLogo: {
+    width: 300,
+    height: 300,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  logo: {
+    width: '50%',
+    height: '50%',
+    borderRadius: 30
   },
   button: {
     justifyContent: 'center',

@@ -4,6 +4,7 @@
   "description": "Olá seja muito bem vindo ao teste de desenvolvedor Ciapetro Distribuidora de Combustíveis.",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
