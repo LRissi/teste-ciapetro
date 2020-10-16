@@ -11,5 +11,6 @@ app.get('/', (req, res) => {
 });
 
 require("./routes/history.js")(app);
+require("./routes/user.js")(app);
 
 app.listen(3000)

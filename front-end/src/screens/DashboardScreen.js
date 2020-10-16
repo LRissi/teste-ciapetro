@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  Keyboard
 } from "react-native";
 import { urlBaseApi } from '../config/Api';
 import firebase from 'firebase';
@@ -18,8 +19,8 @@ class DashboradScreen extends Component {
       sourceCoin: "USD",
       destinyCoin: "",
       optionsCoins: {},
-      valueToConvert: '',
-      convertedValue: ''
+      valueToConvert: "",
+      convertedValue: ""
     };
     this.getCoinsFromApi();
   }
@@ -49,19 +50,41 @@ class DashboradScreen extends Component {
   }
 
   submitConversao = () => {
+    const uid = firebase.auth().currentUser.uid;
+    const { sourceCoin, destinyCoin, valueToConvert } = this.state
+    if (!sourceCoin) {
+      Alert.alert("Aviso!", "Selecione a moeda base para conversão!");
+      return;
+    }
+    if (!destinyCoin) {
+      Alert.alert("Aviso!", "Selecione a moeda para qual será feita conversão!");
+      return;
+    }
+    if (isNaN(valueToConvert)) {
+      Alert.alert("Aviso!", "Valor de conversão inválido!");
+      return
+    }
+    const jsonRequest = {
+      userId: uid,
+      source: sourceCoin,
+      destiny: destinyCoin,
+      valueToConvert: valueToConvert
+    };
+    console.log(jsonRequest);
+    const stringJson = JSON.stringify(jsonRequest);
     fetch(`${urlBaseApi}convert/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        userId: firebase.auth().currentUser.uid,
-        source: this.state.sourceCoin,
-        destiny: this.state.destinyCoin,
-        valueToConvert: this.state.valueToConvert
-      })
-    });
+      body: stringJson
+    }).then(response => response.json()).then(
+      json => { 
+        this.setState({convertedValue: json.conversionValue});
+        this.refs['valueToConvert'].blur();
+      }
+    );
   }
 
   render() {
@@ -95,11 +118,12 @@ class DashboradScreen extends Component {
             })}
           </Picker>
           <TextInput
+            ref="valueToConvert"
             placeholder="Valor a ser convertido"
             placeholderTextColor="#2b307e"
             style={styles.input}
             keyboardType="numeric"
-            onChange={value =>
+            onChangeText={value =>
               this.setState({valueToConvert: value})}
           />
 

@@ -99,7 +99,7 @@ exports.convert = (req, res) => {
     	if (!response.data.quotes) {
     		throw "Requisição inválida"
     	}
-        const conversionValue = response.data.quotes[sourceCoin + destinyCoin];
+		const conversionValue = response.data.quotes[sourceCoin + destinyCoin] * valueToConvert;
         saveHistory({
         	user_id: userId,
         	source_coin: sourceCoin,
@@ -107,7 +107,10 @@ exports.convert = (req, res) => {
 			value_to_convert: valueToConvert,
 			conversion_value: conversionValue,
         }, res);
-        res.send(JSON.stringify(response.data));
+        res.send({
+			success: true,
+			conversionValue: String(conversionValue)
+		});
     })
     .catch(function (error) {
         console.log(error);

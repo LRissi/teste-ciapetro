@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 // import * as Google from 'expo-google-app-auth';
 import firebase from 'firebase';
+import { urlBaseApi } from '../config/Api';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -11,7 +12,18 @@ class LoginScreen extends Component {
   }
 
   signInWithAnonymously = async () => {
-    firebase.auth().signInAnonymously();
+    firebase.auth().signInAnonymously().then( user => {
+      fetch(`${urlBaseApi}users/`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: {
+          uid: user.user.uid
+        }
+      })
+    });
   }
 
   signInWithGoogleAsync = async () => {
